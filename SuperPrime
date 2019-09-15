@@ -1,0 +1,14 @@
+Số siêu nguyên tố
+Due date: Saturday, 14 September 2019, 7:00 AM
+Requested files: SuperPrime.py (Download)
+Type of work: Individual work
+
+Viết chương trình nhập vào số nguyên dương n từ bàn phím, kiểm tra xem n có phải là số siêu nguyên tố hay không?
+
+Số siêu nguyên tố là số nguyên tố mà khi bỏ 1 số tùy ý các chữ số bên phải của nó thì phần còn lại vẫn là số nguyên tố.
+
+Ví dụ:
+
+    Với n = 5939 kết quả là True
+    Với n = 26 kết quả là False
+    Với n = 43 kết quả là False
