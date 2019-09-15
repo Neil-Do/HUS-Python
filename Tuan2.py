@@ -1,7 +1,7 @@
 from random import randint
 
 
-
+# begin of bai1
 def inputBai1():
     print("Bai 1. Nhap vao mot day n so nguyen, viet ham kiem tra tinh chat cua day. Xin moi nhap so cac so nguyen n:")
     n = 0
@@ -81,8 +81,9 @@ def bai1():
 
 def testBai1():
     pass
+# end of bai1
 
-
+# begin of bai2
 def gcd(a, b):
 
     flag = False
@@ -123,8 +124,9 @@ def bai2():
     print("UCLN cua tu so va mau so la: ", _gcd)
     print("BCNN cua tu so va mau so la: ", _lcm)
     print("Phan so toi gian la: ", a, " / ", b)
+# end of bai2
 
-
+# begin of bai3
 def inputBai3():
     print("Bai 3. In ra tam giac PASCAL kich thuoc m. Xin moi nhap vao gia tri cua m nguyen duong ")
     m = int(input("m: "))
@@ -153,8 +155,9 @@ def veTamGiacPASCAL(m):
 def bai3():
     m = inputBai3()
     veTamGiacPASCAL(m)
+# end of bai3
 
-
+# begin of bai4
 def inputBai4():
     print("Bai 4. Tao character histogram cho xau s.")
     s = input("Xin moi nhap xau s: ")
@@ -177,11 +180,55 @@ def stringHistogram(s):
 def bai4():
     s = inputBai4()
     stringHistogram(s)
+# end of bai4
+
+# begin of bai5
+def nameSplit(name):
+    rightmost_space_index = name.rfind(" ")
+    firstname = name[rightmost_space_index + 1:]
+    surname = name[:rightmost_space_index + 1]
+    return [firstname, surname]
+
+
+def sortNameList(nameList):
+    # nameList := [
+    #     [firstname1, surname1],
+    #     [firstname2, surname2],
+    #     ...
+    # ] change to
+    # nameList := [
+    #     [firstname1, surname11, surname12, ... ] -> firstname similar,
+    #     [firstname2, surname21, surname22, ...]
+    #     ...
+    # ] with rows order by firstname, surname order in row
+    nameDict = {}
+    for name in nameList:
+        if name[0] in nameDict:
+            nameDict[name[0]].append(name[1])
+        else:
+            nameDict[name[0]] = [name[1]]
+    for key in nameDict:
+        nameDict[key].sort()
+    for key in sorted(nameDict.keys()):
+        for e in nameDict[key]:
+            print(e, key)
 
 
 def bai5():
-    pass
+    nameList = [
+        ["Vinh", "Nguyen Van"],
+        ["Chinh", "Ngo Thi"],
+        ["Giang", "Tran Thi Ha"],
+        ["Anh", "Bui Lan"],
+        ["Toan", "Tran Kim"],
+        ["Oanh", "Do Thi"],
+        ["Giang", "Pham Quy"]
+    ]
+    print(nameSplit("Do Tat Thanh"))
+    sortNameList(nameList)
+# end of bai5
 
+# begin of bai6
 from random import randint
 
 def smallestInRow(arr):
@@ -247,8 +294,9 @@ def bai6():
                 flag = True
     if flag == False:
         print("Khong ton tai diem yen ngua.")
+# end of bai6
 
-
+# begin of bai7
 def congMaTran(a, b):
     if len(a) != len(b) or len(a[0]) != len(b[0]):
         print("Ma tran khong cung kich thuoc, khong the cong.")
@@ -294,8 +342,9 @@ def bai7():
     product_matrix = nhanMaTran(a, c)
     print("Tich cua 2 ma tran a va c la: ")
     matrixPrinter(product_matrix)
+# end of bai7
 
-
+# begin of bai8
 def getMatrixSize(n):
     matrixSizes = []
     for i in range(1, n + 1):
@@ -331,8 +380,9 @@ def bai8():
     for i in range(len(matrixSizes)):
         mat = createMatrix(matrixSizes[i], matrixElements)
         matrixPrinter(mat)
+# end of bai8
 
-
+# begin of bai9
 def magicSquareTest(mat):
     if len(mat) != len(mat[0]):
         print("Ma tran khong phai ma tran vuong, do do khong the la ma phuong.")
@@ -392,11 +442,45 @@ def bai9():
 
     mat = randomSquareMatrix(4)
     magicSquareTestPrint(mat)
+# end of bai9
 
+# begin of bai10
+def reSetIndex(index, n):
+    if index < 0:
+        index += n
+    elif index >= n:
+        index -= n
+    return index
+
+
+def createMagicSquare(n):
+    # create magic square with size n x n and all elements' value equal 0
+    magicSquare = []
+    for r in range(n):
+        row = []
+        for c in range(n):
+            row.append(0)
+        magicSquare.append(row)
+
+    start_col = n // 2
+    c = start_col
+    r = 0
+    magicSquare[r][c] = 1
+    for e_value in range(2, n**2 + 1):
+        c_next = reSetIndex(c + 1, n)
+        r_next = reSetIndex(r - 1, n)
+        if magicSquare[r_next][c_next] != 0:
+            c_next = reSetIndex(c, n)
+            r_next = reSetIndex(r + 1, n)
+        magicSquare[r_next][c_next] = e_value
+        c = c_next
+        r = r_next
+    matrixPrinter(magicSquare)
+    magicSquareTestPrint(magicSquare)
 
 def bai10():
-    pass
-
+    createMagicSquare(9)
+# end of bai10
 
 if __name__ == "__main__":
-    bai8()
+    bai10()
