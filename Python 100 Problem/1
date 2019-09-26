@@ -1,0 +1,31 @@
+zlib
+  zlib.compress()
+  zlib.decompress()
+
+
+random
+  random.choice()
+  random.sample()
+  random.randrange()
+  random.randint()
+  random.random()
+  random.shuffle(list)
+
+
+list comprehension
+
+
+generator
+
+
+try - except - finally
+
+
+assertion - error
+
+
+Time
+  Timer
+  timeit
+
+enumerate()
