@@ -23,6 +23,8 @@ try - except - finally
 
 assertion - error
 
+itertools
+  itertools.permutations(l)
 
 Time
   Timer
