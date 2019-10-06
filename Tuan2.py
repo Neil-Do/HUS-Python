@@ -215,16 +215,25 @@ def sortNameList(nameList):
 
 
 def bai5():
+    # nameList = [
+    #     ["Vinh", "Nguyen Van"],
+    #     ["Chinh", "Ngo Thi"],
+    #     ["Giang", "Tran Thi Ha"],
+    #     ["Anh", "Bui Lan"],
+    #     ["Toan", "Tran Kim"],
+    #     ["Oanh", "Do Thi"],
+    #     ["Giang", "Pham Quy"]
+    # ],
     nameList = [
-        ["Vinh", "Nguyen Van"],
-        ["Chinh", "Ngo Thi"],
-        ["Giang", "Tran Thi Ha"],
-        ["Anh", "Bui Lan"],
-        ["Toan", "Tran Kim"],
-        ["Oanh", "Do Thi"],
-        ["Giang", "Pham Quy"]
+        ["Vĩnh", "Nguyễn Văn"],
+        ["Chinh", "Ngô Thị"],
+        ["Giang", "Trần Thị Hà"],
+        ["Anh", "Bùi Lan"],
+        ["Toàn", "Trần Kim"],
+        ["Oánh", "Đỗ Thị"],
+        ["Giang", "Phạm Quý"]
     ]
-    print(nameSplit("Do Tat Thanh"))
+    print(nameSplit("Đỗ Tất Thành"))
     sortNameList(nameList)
 # end of bai5
 
