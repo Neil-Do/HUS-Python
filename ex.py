@@ -1,7 +1,6 @@
-from random import randint
-for i in range(4):
-    line = []
-    for j in range(4):
-        n = randint(0, 100)
-        line.append(n)
-    print(line)
+s = '1'
+reg = '0123456789'
+if s in reg:
+    print("True")
+else:
+    print("False")

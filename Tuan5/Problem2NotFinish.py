@@ -26,6 +26,4 @@ class StringExp:
         return True
 
 
-
-a = StringExp("([]{)")
-print(a.isValid())
+class WellNetExp(StringExp):
