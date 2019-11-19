@@ -1,0 +1,6 @@
+s = input("Nhap a: \n").rstrip()
+a = int(s)
+aa = int(s + s)
+aaa = int(s + s + s)
+aaaa = int(s + s + s + s)
+print(a + aa + aaa + aaaa)
