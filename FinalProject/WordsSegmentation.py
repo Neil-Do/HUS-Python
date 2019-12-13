@@ -14,33 +14,36 @@
 
 
 #create vietnamese syllables dictionary
-fVNSyl = open("data/VNsyl.txt")
-vnSyllables = {}
-for line in fVNSyl:
-    line = line.strip()
-    # line == syllable
-    vnSyllables[line] = True
-fVNSyl.close()
+# fVNSyl = open("data/VNsyl.txt")
+# vnSyllables = {}
+# for line in fVNSyl:
+#     line = line.strip()
+#     # line == syllable
+#     vnSyllables[line] = True
+# fVNSyl.close()
+#
+#
+# # create vietnamese wordlist dictionary
+# fwordlist = open("data/wordlist.txt")
+# wordlist = {}
+# for line in fwordlist:
+#     line = line.strip()
+#     # line == syllable
+#     wordlist[line] = True
+# fwordlist.close()
+#
+#
+# def fileToSentences(fileName):
+#     fi = open(fileName)
+#     sentences = []
+#     for line in fi:
+#         if line != '\n':
+#             line = line.strip()
+#             sentences.append(re.split("["+ string.punctuation + "]+", line))
+#     return sentences
 
-
-# create vietnamese wordlist dictionary
-fwordlist = open("data/wordlist.txt")
-wordlist = {}
-for line in fwordlist:
-    line = line.strip()
-    # line == syllable
-    wordlist[line] = True
-fwordlist.close()
-
-
-def fileToSentences(fileName):
-    fi = open(fileName)
-    sentences = []
-    for line in fi:
-        if line != '\n':
-            line = line.strip()
-            sentences.append(re.split("["+ string.punctuation + "]+", line))
-    return sentences
+import ex
 
 
 if __name__ == "__main__":
+    print(ex.exFile.TEST_IMPORT)
