@@ -19,7 +19,7 @@ class Feats():
         return self.feats_
 
     # (Feature = (syllabel, type, label))
-    def add(self, (syllabel, type, label)):
+    def add(self, syllabel, type, label):
         self.feats_.append((syllabel, type, label))
 
     def type(self, word):
@@ -87,5 +87,3 @@ class Feats():
                     ans.append((syllabel, type_, label))
 
             return ans
-
-            

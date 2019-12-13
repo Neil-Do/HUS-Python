@@ -64,8 +64,5 @@ def test():
         if count > 10:
             break
 
-s = "machine learning: \"AI systems need the ability to acquire their own knowledge, by extracting patterns from raw data. This capability is known as machine learning\""
-a = 1
-b = 4
-c = (a > b) and 1 or 2
-print(str(c))
+a = None
+print(a)
