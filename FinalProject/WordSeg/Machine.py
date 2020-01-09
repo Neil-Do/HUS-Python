@@ -55,33 +55,37 @@ class Machine():
 
         # debug
         for i in range(self.WINDOW_LENGTH, length_ - self.WINDOW_LENGTH - 1):
-            featset = {}
+            featset = []
             # get 1-gram
             for j in range(i - self.WINDOW_LENGTH + 1, i + 1 + self.WINDOW_LENGTH):
                 index = itostr(j - i) + "|"
-                syllablel = index + vfeats[j].syllabel
-                featset[syllablel] = ref
+                syllablel = index + self.vfeats[j].syllabel
+                idx_syllablel = self.strmap.getNum(syllablel, ref)
+                featset.append(idx_syllablel)
 
-                type = index + vfeats[j].type
-                featset[type] = ref
+                type_ = index + self.vfeats[j].type
+                idx_type = self.strmap.getNum(type_, ref)
+                featset.append(idx_type)
 
             # get 2-gram
             for j in range(i - self.WINDOW_LENGTH + 1, i + self.WINDOW_LENGTH):
                 index = itostr(j - i) + "||"
-                syllablel_j = vfeats[j].syllabel
-                syllablel_j1 = vfeats[j+1].syllabel
-                featset[index + syllablel_j + ' ' + syllablel_j1] = ref
+                syllablel_j = self.vfeats[j].syllabel
+                syllablel_j1 = self.vfeats[j+1].syllabel
+                idx_syllablel2 = self.strmap.getNum(index + syllablel_j + ' ' + syllablel_j1, ref)
+                featset.append(idx_syllablel2)
 
-                type_j = vfeats[j].type
-                type_j1 = vfeats[j+1].type
-                featset[index + type_j + ' ' + type_j1] = ref
+                type_j = self.vfeats[j].type
+                type_j1 = self.vfeats[j+1].type
+                idx_type2 = self.strmap.getNum(index + type_j + ' ' + type_j1, ref)
+                featset.append(idx_type2)
 
             # get Dictionary-features
             for j in range(1, MAX_WORD_LENGTH):
                 for k in range(i - j + 1, i + 2):
-                    dummy = vfeats[k].syllabel
+                    dummy = self.vfeats[k].syllabel
                     for z in range(k + 1, k + j):
-                        dummy += vfeats[z].syllabel
+                        dummy += ' ' + self.vfeats[z].syllabel
                     if self.dicmap.isWord(dummy):
                         # word segment is LEFT of dictionary features
                         if k == i + 1:
@@ -92,7 +96,7 @@ class Machine():
                         # word segment is INSIDE of dictionary features
                         if k <= i and k+j-1 > i:
                             index = "I(" + itostr(k - i) + ")|"
-                        featset[self.strmap.getNum(index + dummy, ref)] = ref
+                        featset.append(self.strmap.getNum(index + dummy, ref))
 
             #get label
             if self.vfeats[i].label == 1:
@@ -156,10 +160,10 @@ class Machine():
 
 
     def save(self, model_filename, strMap_filename):
-        modelfile = PATH + model_filename + ".model"
+        modelfile = self.PATH + model_filename + ".model"
         print("Save model: ", model_filename + ".model")
         save_model(modelfile, self._model)
-        strMapFile = PATH + strMap_filename + ".map"
+        strMapFile = self.PATH + strMap_filename + ".map"
         self.strmap.save(strMapFile)
 
         # function close test
@@ -173,3 +177,27 @@ class Machine():
         error_rate = 100 - count/len(y) * 100
         print('Error rate: ', error_rate)
         print('data size: ', len(y))
+
+
+    def load(self, model_filename, strMap_filename, path = self.PATH):
+        '''
+        load(self, model_filename, strMap_filename, path = self.PATH)
+        '''
+        print('Loading pretrain model...')
+        self._model = load_model(path + model_filename)
+        print('Success loading pretrain model...')
+        print('Loading pretrain strMap...')
+        self.strmap.load(path + strMap_filename)
+        print('Success loading pretrain strMap...')
+
+    def segment(self, sentence):
+
+        self.feats = Feats.Feats()
+        self.extract(sentence, PREDICT)
+        if (self.feats.size() == 0)	return "Empty result"
+
+        self.getProblem()
+        ans = ''
+        for i in range(self.feats.size()):
+            if predict(self._model, self._problem.x[i]) == self.index_SPACE:
+                ans += self.vfeats[i + WINDOW_LENGTH].

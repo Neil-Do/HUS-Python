@@ -56,7 +56,7 @@ class Feats():
 
 
         # preprocessing string, /* Regular Expressions */
-        def regex(self, text):
+        def regex(self, text, ref):
             string ans = ""
 
             # replace some UTF-8 char by one byte char
@@ -75,8 +75,8 @@ class Feats():
             return text
 
 
-        def token(self, text):
-            text = regex(text, ref)
+        def token(self, text, ref):
+            text = self.regex(text, ref)
             text += Configure.SPACE
             ans = []    # vector<featuresOfSyllabel>
             dummy = ()      # featuresOfSyllabel
