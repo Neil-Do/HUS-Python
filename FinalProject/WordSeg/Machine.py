@@ -3,8 +3,9 @@ import Feats
 import DicMap
 import StrMap
 import SylMap
-import liblinear.liblinear as lln
-
+import time
+from liblinear.python.liblinear import *
+from liblinear.python.liblinearutil import *
 
 class Machine():
 
@@ -16,7 +17,7 @@ class Machine():
         self.index_UNDER = 2
         self.reference = ref
         self.feats = Feats.Feats()
-        self._model = lln.model
+        self._model = None
         # vector<featuresOfSyllabel>*
         self.vfeats = []
         if ref == Configure.LEARN:
@@ -127,16 +128,48 @@ class Machine():
             xx[len(feature_set)] = -1
             x[i] = xx
 
-        prob = problem(y, x [,bias=-1])
+        self._problem = problem(y, x)
 
 
     def delProblem(self):
-        # for i in range
-        pass
+        self._problem = None
+
 
     def training(self):
+
+        start = time.time()
+
+        _parameter = parameter('-s 6 -e 0.01 -c 1 -v 10')
+        print("Training Mode. Start training...")
+        self.getProblem()
+        self._model = train(self._problem, _parameter)
+        print("Finish training.")
+
+        end = time.time()
+        print('Running time: ', end - start)
+
 
     # x double is 0 ?
     def zero(x):
         if round(abs(x), 9) == 0:
             return True
+
+
+    def save(self, model_filename, strMap_filename):
+        modelfile = PATH + model_filename + ".model"
+        print("Save model: ", model_filename + ".model")
+        save_model(modelfile, self._model)
+        strMapFile = PATH + strMap_filename + ".map"
+        self.strmap.save(strMapFile)
+
+        # function close test
+    def accuracy(self):
+        y = self._problem.y
+        y_hat = predict(self._model, _problem.x)
+        count = 0
+        for i in range(len(y)):
+            if y[i] == y_hat[i]:
+                count += 1
+        error_rate = 100 - count/len(y) * 100
+        print('Error rate: ', error_rate)
+        print('data size: ', len(y))

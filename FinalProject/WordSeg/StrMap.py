@@ -40,7 +40,10 @@ class StrMap():
 
 
     # write map file
-    def print(self, mapfile):
+    def save(self, mapfile):
+        '''
+        mapfile = hard link
+        '''
         fileOutput = open(mapfile, 'w')
         fileOutput.write(str(len(self.size_)))
         for str in self.smap_:
