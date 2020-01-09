@@ -6,8 +6,8 @@ class SylMap():
         self.syl_ = set(syllabel.strip() for syllabel in sylMapDataFile)
         sylMapDataFile.close()
 
-    def isVNESE(self, syllabel):
-        return syllabel in self.syl_
+    def isVNESE(self, token):
+        return token in self.syl_
 
 
 # da test

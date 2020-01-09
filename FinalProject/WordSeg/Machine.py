@@ -102,11 +102,33 @@ class Machine():
                 # Feat or features = tuple<label (int), featset>
                 self.feats.add((label, featset))
 
+
     # Convert a feats format to liblinear's problem struct
     def getProblem(self):
         # run by lib linear
         sizeOfFeats = self.feats.size()
-        
+        x = [None] * sizeOfFeats # feature_node 2D arr
+        # y = labels, space = 1, underscore = 2
+        y = [0] * sizeOfFeats
+
+        for i in range(sizeOfFeats):
+
+            # y[i] label of sample i
+            y[i] = self.feats.get()[i][0]
+
+            feature_set = self.feats.get()[i][1]
+            # x[i] = xx = arr of feature_node, liblinear's object for sentences' features
+            xx = [None] * (len(feature_set) + 1)
+
+            for j in range(len(feature_set)):
+                idx = feature_set[j]
+                val = 1
+                xx[j] = feature_node(idx, val)
+            xx[len(feature_set)] = -1
+            x[i] = xx
+
+        prob = problem(y, x [,bias=-1])
+
 
     def delProblem(self):
         # for i in range

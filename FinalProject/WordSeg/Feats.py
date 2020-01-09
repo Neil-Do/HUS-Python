@@ -18,9 +18,10 @@ class Feats():
     def get(self):
         return self.feats_
 
-    # (Feature = (syllabel, type, label))
-    def add(self, syllabel, type, label):
-        self.feats_.append((syllabel, type, label))
+
+    # (Feature = (label, feature_set))
+    def add(self, feat):
+        self.feats_.append(feat)
 
     def type(self, word):
         VH = False      # Viet Hoa
@@ -55,7 +56,7 @@ class Feats():
 
 
         # preprocessing string, /* Regular Expressions */
-        def regex(self, text, ref):
+        def regex(self, text):
             string ans = ""
 
             # replace some UTF-8 char by one byte char
@@ -74,7 +75,7 @@ class Feats():
             return text
 
 
-        def token(self, text, ref):
+        def token(self, text):
             text = regex(text, ref)
             text += Configure.SPACE
             ans = []    # vector<featuresOfSyllabel>

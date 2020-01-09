@@ -1,5 +1,9 @@
 # Python Course's Final Project.
 
+## Papers:
+
+  - Ứng dụng phương pháp Pointwise vào bài toán tách từ cho tiếng Việt - Lưu Tuấn Anh, Yamamoto Kazuhide
+
 ## Requirements:
 
  - [liblinear](https://github.com/cjlin1/liblinear) package
