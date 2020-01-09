@@ -8,5 +8,5 @@ class DicMap():
         dmapDataFile.close()
 
 
-    def isWord(str):
+    def isWord(self, str):
         return str in self.dmap_

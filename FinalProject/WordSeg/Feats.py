@@ -54,16 +54,36 @@ class Feats():
         return "O"
 
 
-        # return string
+        # preprocessing string, /* Regular Expressions */
         def regex(self, text, ref):
-            pass
+            string ans = ""
+
+            # replace some UTF-8 char by one byte char
+            source = ["…", "“", "”"]
+            replace = ["...", "\"", "\""]
+            for i in range(3):
+                text = text.replace(source[i], replace[i])
+
+            #segment symbols: a?a => a ? a
+            if ref == Configure.PREDICT:
+                for symb in Configure.SYMBOLS:
+                    text = text.replace(symb, ' ' + symb + ' ')
+
+            # remove consecutive space and underscore: ___ => _
+            text = re.sub(r'([ _])+', r'\1', text )
+            return text
 
 
         def token(self, text, ref):
-            # text = regex(text, ref)
-            text = Configure.SPACE;
+            text = regex(text, ref)
+            text += Configure.SPACE
             ans = []    # vector<featuresOfSyllabel>
             dummy = ()      # featuresOfSyllabel
+            '''
+            pos := current space|underscore position
+            prev := previous space|underscore position
+            segment := bool variable confirm current character is space|underscore
+            '''
             pos = 0
             prev = -1
             N = len(text)
@@ -81,7 +101,7 @@ class Feats():
                         prev = pos
                         continue
                     syllabel = text[prev+1:pos]
-                    type_ = type(syllabel)
+                    type_ = self.type(syllabel)
                     label = (text[pos] == Configure.SPACE) and 1 or 2
                     prev = pos
                     ans.append((syllabel, type_, label))
