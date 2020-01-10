@@ -57,7 +57,7 @@ class Feats():
 
         # preprocessing string, /* Regular Expressions */
         def regex(self, text, ref):
-            string ans = ""
+            ans = ""
 
             # replace some UTF-8 char by one byte char
             source = ["…", "“", "”"]

@@ -5,7 +5,7 @@ import StrMap
 import SylMap
 import time
 from liblinear.python.liblinear import *
-from liblinear.python.liblinearutil import *
+# from liblinear.python.liblinearutil import *
 
 class Machine():
 
@@ -109,6 +109,8 @@ class Machine():
 
 
     # Convert a feats format to liblinear's problem struct
+
+    # getproblem for liblinear
     def getProblem(self):
         # run by lib linear
         sizeOfFeats = self.feats.size()
@@ -133,7 +135,7 @@ class Machine():
             x[i] = xx
 
         self._problem = problem(y, x)
-
+        # end getproblem for liblinear
 
     def delProblem(self):
         self._problem = None
@@ -166,6 +168,7 @@ class Machine():
         strMapFile = self.PATH + strMap_filename + ".map"
         self.strmap.save(strMapFile)
 
+
         # function close test
     def accuracy(self):
         y = self._problem.y
@@ -179,10 +182,12 @@ class Machine():
         print('data size: ', len(y))
 
 
-    def load(self, model_filename, strMap_filename, path = self.PATH):
+    def load(self, model_filename, strMap_filename, path = None):
         '''
         load(self, model_filename, strMap_filename, path = self.PATH)
         '''
+        if path == None:
+            path = self.PATH
         print('Loading pretrain model...')
         self._model = load_model(path + model_filename)
         print('Success loading pretrain model...')
@@ -190,14 +195,15 @@ class Machine():
         self.strmap.load(path + strMap_filename)
         print('Success loading pretrain strMap...')
 
-    def segment(self, sentence):
-
-        self.feats = Feats.Feats()
-        self.extract(sentence, PREDICT)
-        if (self.feats.size() == 0)	return "Empty result"
-
-        self.getProblem()
-        ans = ''
-        for i in range(self.feats.size()):
-            if predict(self._model, self._problem.x[i]) == self.index_SPACE:
-                ans += self.vfeats[i + WINDOW_LENGTH].
+    # def segment(self, sentence):
+    #
+    #     self.feats = Feats.Feats()
+    #     self.extract(sentence, PREDICT)
+    #     if (self.feats.size() == 0):
+    #         return "Empty result"
+    #
+    #     self.getProblem()
+    #     ans = ''
+    #     for i in range(self.feats.size()):
+    #         if predict(self._model, self._problem.x[i]) == self.index_SPACE:
+    #             ans += self.vfeats[i + WINDOW_LENGTH].
