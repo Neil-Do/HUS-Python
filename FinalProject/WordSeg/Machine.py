@@ -7,6 +7,7 @@ import time
 from liblinear.python.liblinear import *
 # from liblinear.python.liblinearutil import *
 
+#liblinear
 class Machine():
 
     def __init__(self, window_length, path, ref):
@@ -141,6 +142,19 @@ class Machine():
         self._problem = None
 
 
+    # def training(self):
+    #
+    #     start = time.time()
+    #
+    #     _parameter = parameter('-s 6 -e 0.01 -c 1 -v 10')
+    #     print("Training Mode. Start training...")
+    #     self.getProblem()
+    #     self._model = train(self._problem, _parameter)
+    #     print("Finish training.")
+    #
+    #     end = time.time()
+    #     print('Running time: ', end - start)
+
     def training(self):
 
         start = time.time()
@@ -153,7 +167,6 @@ class Machine():
 
         end = time.time()
         print('Running time: ', end - start)
-
 
     # x double is 0 ?
     def zero(x):
