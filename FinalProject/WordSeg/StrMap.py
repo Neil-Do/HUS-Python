@@ -8,12 +8,14 @@ class StrMap():
         features string pattern:
         '''
         self.smap_ = smap_
-        self.size_ = size_
+        self.size_ = int(size_)
+        self.size_ += 1
 
     def getNum(self, str, ref):
         '''
         return index of string key in strmap
         '''
+        # print(str)
         if str not in self.smap_:
             if ref == Configure.LEARN:
                 num = self.size_
@@ -21,7 +23,7 @@ class StrMap():
                 self.size_ += 1
                 return num
             else:
-                return self.size_ + 1
+                return 0
         else:
             return self.smap_[str]
 
@@ -57,7 +59,7 @@ class StrMap():
         map = ["+0|lẽ", 5885]
         '''
         fileInput = open(path, 'r')
-        size_ = fileInput.readline()
+        size_ = int(fileInput.readline())
         for line in fileInput:
             map = line.strip().split()
             features = ' '.join(map[:-1])
